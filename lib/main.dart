@@ -8,6 +8,7 @@ class Quizzler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
         body: const SafeArea(
@@ -32,6 +33,18 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scoreKeeper = [
+    const Icon(
+      Icons.check,
+      color: Colors.green,
+      semanticLabel: 'Check/ Ok Icon Indicates True',
+    ),
+    const Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,6 +65,17 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked true.
+            setState(
+              () {
+                scoreKeeper.add(
+                  const Icon(
+                    Icons.check,
+                    color: Colors.green,
+                    semanticLabel: 'Check/ Ok Icon Indicates True',
+                  ),
+                );
+              },
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
@@ -75,6 +99,17 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked false.
+            setState(
+              () {
+                scoreKeeper.add(
+                  const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                    semanticLabel: 'Check/ Ok Icon Indicates True',
+                  ),
+                );
+              },
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.red,
@@ -91,6 +126,13 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
+        const Divider(
+          color: Colors.transparent,
+          height: 55.5,
+        ),
+        Row(
+          children: scoreKeeper, // End Of CHildren
+        )
       ],
     );
   }
