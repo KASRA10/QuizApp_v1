@@ -40,16 +40,32 @@ class _QuizPageState extends State<QuizPage> {
     ),
   ];
 
+  // List Of Questions
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
+  ];
+
+  List<bool> answers = [
+    false,
+    true,
+    true,
+  ];
+
+  int questionNumber = 0;
+  int theNumberOfQuestion = 1;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const Text(
-          'This is where the question text will go.',
+        Text(
+          '$theNumberOfQuestion) ${questions[questionNumber]}',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 21.0,
+          style: const TextStyle(
+            fontSize: 26.0,
             color: Colors.white,
           ),
         ),
@@ -60,15 +76,18 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked true.
+            bool correctAnswer = answers[questionNumber];
+
+            if (correctAnswer == true) {
+              print('It is Right');
+            } else {
+              print('it is wrong');
+            }
+
             setState(
               () {
-                scoreKeeper.add(
-                  const Icon(
-                    Icons.check,
-                    color: Colors.green,
-                    semanticLabel: 'Check/ Ok Icon Indicates True',
-                  ),
-                );
+                theNumberOfQuestion++;
+                questionNumber++;
               },
             );
           },
@@ -94,15 +113,17 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked false.
+            bool correctAnswer = answers[questionNumber];
+
+            if (correctAnswer == false) {
+              print('It is Right');
+            } else {
+              print('it is wrong');
+            }
             setState(
               () {
-                scoreKeeper.add(
-                  const Icon(
-                    Icons.close,
-                    color: Colors.red,
-                    semanticLabel: 'Check/ Ok Icon Indicates True',
-                  ),
-                );
+                theNumberOfQuestion++;
+                questionNumber++;
               },
             );
           },
