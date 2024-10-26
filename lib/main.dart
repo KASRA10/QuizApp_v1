@@ -68,7 +68,7 @@ class _QuizPageState extends State<QuizPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          '$theNumberOfQuestion) ${questions[questionNumber]}',
+          '$theNumberOfQuestion) ${questionBank[questionNumber].questionText}',
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 26.0,
@@ -82,7 +82,7 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked true.
-            bool correctAnswer = answers[questionNumber];
+            bool correctAnswer = questionBank[questionNumber].questionAnswer;
 
             if (correctAnswer == true) {
               print('It is Right');
