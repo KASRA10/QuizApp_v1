@@ -119,7 +119,7 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked false.
-            bool correctAnswer = answers[questionNumber];
+            bool correctAnswer = questionBank[questionNumber].questionAnswer;
 
             if (correctAnswer == false) {
               print('It is Right');
