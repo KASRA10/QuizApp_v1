@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'questions.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain(); // Create An Object of QuizBrain
 
 void main() => runApp(
       const Quizzler(),
@@ -12,14 +14,16 @@ class Quizzler extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
-        body: const SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15.5,
+      home: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.grey.shade900,
+          body: const SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15.5,
+              ),
+              child: QuizPage(),
             ),
-            child: QuizPage(),
           ),
         ),
       ),
@@ -43,32 +47,13 @@ class _QuizPageState extends State<QuizPage> {
     ),
   ];
 
-  // List Of class Of Questions
-  List<Questions> questionBank = [
-    Questions(
-      q: 'You can lead a cow down stairs but not up stairs.',
-      a: false,
-    ),
-    Questions(
-      q: 'Approximately one quarter of human bones are in the feet.',
-      a: true,
-    ),
-    Questions(
-      q: 'A slug\'s blood is green.',
-      a: true,
-    ),
-  ];
-
-  int questionNumber = 0;
-  int theNumberOfQuestion = 1;
-
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          '$theNumberOfQuestion) ${questionBank[questionNumber].questionText}',
+          '${quizBrain.getTheNumberOfQuestion()}) ${quizBrain.getQuestionText()}',
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 26.0,
@@ -82,18 +67,20 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked true.
-            bool correctAnswer = questionBank[questionNumber].questionAnswer;
+            bool correctAnswer = quizBrain.getQuestionAnswer();
 
             if (correctAnswer == true) {
+              // ignore: avoid_print
               print('It is Right');
             } else {
+              // ignore: avoid_print
               print('it is wrong');
             }
 
             setState(
               () {
-                theNumberOfQuestion++;
-                questionNumber++;
+                quizBrain.nextNumberOfQuestion();
+                quizBrain.nextQuestionNumber();
               },
             );
           },
@@ -119,17 +106,19 @@ class _QuizPageState extends State<QuizPage> {
         ElevatedButton(
           onPressed: () {
             //The user picked false.
-            bool correctAnswer = questionBank[questionNumber].questionAnswer;
+            bool correctAnswer = quizBrain.getQuestionAnswer();
 
             if (correctAnswer == false) {
+              // ignore: avoid_print
               print('It is Right');
             } else {
+              // ignore: avoid_print
               print('it is wrong');
             }
             setState(
               () {
-                theNumberOfQuestion++;
-                questionNumber++;
+                quizBrain.nextNumberOfQuestion();
+                quizBrain.nextQuestionNumber();
               },
             );
           },
