@@ -37,6 +37,8 @@ class QuizBrain {
   void nextQuestionNumber() {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
+    } else if (_questionNumber == _questionBank.length - 1) {
+      _isFinishedStatus = true;
     }
     // ignore: avoid_print
     print(_questionNumber);
@@ -50,8 +52,21 @@ class QuizBrain {
     }
   }
 
+  // Reset Method
+  void resetAll() {
+    _questionNumber = -1;
+    _theNumberOfQuestion = 0;
+    _isFinishedStatus = false;
+  }
+
   // Create A Method To Check If We Are At The End Of The Question Lists Or Not
-  bool isFinished() => _questionNumber == _questionBank.length ? true : false;
+  bool isFinished() {
+    if (_isFinishedStatus == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   // Create Getter For Our Private(Encapsulation) Fields
   String getQuestionText() => _questionBank[_questionNumber].questionText;
@@ -59,10 +74,4 @@ class QuizBrain {
   bool getQuestionAnswer() => _questionBank[_questionNumber].questionAnswer;
 
   int getTheNumberOfQuestion() => _theNumberOfQuestion;
-
-  // Reset Method
-  void resetAll() {
-    _questionNumber = 0;
-    _theNumberOfQuestion = 1;
-  }
 }
