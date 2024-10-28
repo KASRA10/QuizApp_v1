@@ -3,6 +3,7 @@ import 'questions.dart';
 class QuizBrain {
   int _questionNumber = 0;
   int _theNumberOfQuestion = 1;
+  bool _isFinishedStatus = false;
 
   final List<Questions> _questionBank = [
     Questions('Some cats are actually allergic to humans', true),
@@ -49,10 +50,19 @@ class QuizBrain {
     }
   }
 
+  // Create A Method To Check If We Are At The End Of The Question Lists Or Not
+  bool isFinished() => _questionNumber == _questionBank.length ? true : false;
+
   // Create Getter For Our Private(Encapsulation) Fields
   String getQuestionText() => _questionBank[_questionNumber].questionText;
 
   bool getQuestionAnswer() => _questionBank[_questionNumber].questionAnswer;
 
   int getTheNumberOfQuestion() => _theNumberOfQuestion;
+
+  // Reset Method
+  void resetAll() {
+    _questionNumber = 0;
+    _theNumberOfQuestion = 1;
+  }
 }

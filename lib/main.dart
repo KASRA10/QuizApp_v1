@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain(); // Create An Object of QuizBrain
@@ -40,12 +41,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    const Icon(
-      Icons.start_outlined,
-      color: Colors.white,
-    ),
-  ];
+  List<Icon> scoreKeeper = [];
 
   void checkAnswer(bool userAnswer) {
     //The user picked false.
@@ -54,26 +50,51 @@ class _QuizPageState extends State<QuizPage> {
     // Create A Reset Button Function
 
     setState(() {
-      if (userAnswer == correctAnswer) {
-        // ignore: avoid_print
-        print('It is Right');
-        scoreKeeper.add(
-          const Icon(
-            Icons.check,
-            color: Colors.green,
-            semanticLabel: 'check mark as true',
-          ),
-        );
+      if (quizBrain.isFinished() == true) {
+        Alert(
+          context: context,
+          type: AlertType.success,
+          title: "Game Is Over!",
+          desc: "All Questions Have Been Answered!",
+          buttons: [
+            DialogButton(
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+              color: Colors.grey.shade900,
+              child: Text(
+                "Try Again",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
+        ).show();
+        quizBrain.resetAll();
+        scoreKeeper.clear();
       } else {
-        // ignore: avoid_print
-        print('it is wrong');
-        scoreKeeper.add(
-          const Icon(
-            Icons.close,
-            color: Colors.red,
-            semanticLabel: 'cross - X - icon as false',
-          ),
-        );
+        if (userAnswer == correctAnswer) {
+          // ignore: avoid_print
+          print('It is Right');
+          scoreKeeper.add(
+            const Icon(
+              Icons.check,
+              color: Colors.green,
+              semanticLabel: 'check mark as true',
+            ),
+          );
+        } else {
+          // ignore: avoid_print
+          print('it is wrong');
+          scoreKeeper.add(
+            const Icon(
+              Icons.close,
+              color: Colors.red,
+              semanticLabel: 'cross - X - icon as false',
+            ),
+          );
+        }
       }
     });
   }
