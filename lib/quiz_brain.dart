@@ -49,15 +49,10 @@ class QuizBrain {
     }
   }
 
-  String getQuestionText() {
-    return _questionBank[_questionNumber].questionText;
-  }
+  // Create Getter For Our Private(Encapsulation) Fields
+  String getQuestionText() => _questionBank[_questionNumber].questionText;
 
-  bool getQuestionAnswer() {
-    return _questionBank[_questionNumber].questionAnswer;
-  }
+  bool getQuestionAnswer() => _questionBank[_questionNumber].questionAnswer;
 
-  int getTheNumberOfQuestion() {
-    return _theNumberOfQuestion;
-  }
+  int getTheNumberOfQuestion() => _theNumberOfQuestion;
 }

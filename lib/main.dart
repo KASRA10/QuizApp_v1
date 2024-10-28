@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain(); // Create An Object of QuizBrain
@@ -51,6 +50,8 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userAnswer) {
     //The user picked false.
     bool correctAnswer = quizBrain.getQuestionAnswer();
+
+    // Create A Reset Button Function
 
     setState(() {
       if (userAnswer == correctAnswer) {
