@@ -10,7 +10,7 @@ class QuizBrain {
     Questions(
         'Approximately one quarter of human bones are in the feet.', true),
     Questions('A slug\'s blood is green.', true),
-    Questions('Buzz Aldrin\'s mother\'s maiden name was \"Moon\".', true),
+    Questions('Buzz Aldrin\'s mother\'s maiden name was "Moon".', true),
     Questions('It is illegal to pee in the Ocean in Portugal.', true),
     Questions(
         'No piece of square dry paper can be folded in half more than 7 times.',

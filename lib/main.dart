@@ -47,6 +47,33 @@ class _QuizPageState extends State<QuizPage> {
     ),
   ];
 
+  void checkAnswer(bool userAnswer) {
+    //The user picked false.
+    bool correctAnswer = quizBrain.getQuestionAnswer();
+
+    if (userAnswer == correctAnswer) {
+      // ignore: avoid_print
+      print('It is Right');
+      scoreKeeper.add(
+        const Icon(
+          Icons.check,
+          color: Colors.green,
+          semanticLabel: 'check mark as true',
+        ),
+      );
+    } else {
+      // ignore: avoid_print
+      print('it is wrong');
+      scoreKeeper.add(
+        const Icon(
+          Icons.close,
+          color: Colors.red,
+          semanticLabel: 'cross - X - icon as false',
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,16 +93,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         ElevatedButton(
           onPressed: () {
-            //The user picked true.
-            bool correctAnswer = quizBrain.getQuestionAnswer();
-
-            if (correctAnswer == true) {
-              // ignore: avoid_print
-              print('It is Right');
-            } else {
-              // ignore: avoid_print
-              print('it is wrong');
-            }
+            checkAnswer(true);
 
             setState(
               () {
@@ -105,16 +123,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         ElevatedButton(
           onPressed: () {
-            //The user picked false.
-            bool correctAnswer = quizBrain.getQuestionAnswer();
-
-            if (correctAnswer == false) {
-              // ignore: avoid_print
-              print('It is Right');
-            } else {
-              // ignore: avoid_print
-              print('it is wrong');
-            }
+            checkAnswer(false);
             setState(
               () {
                 quizBrain.nextNumberOfQuestion();
@@ -142,7 +151,7 @@ class _QuizPageState extends State<QuizPage> {
           height: 55.5,
         ),
         Row(
-          children: scoreKeeper, // End Of CHildren
+          children: scoreKeeper,
         )
       ],
     );
