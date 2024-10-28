@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain(); // Create An Object of QuizBrain
@@ -51,27 +52,29 @@ class _QuizPageState extends State<QuizPage> {
     //The user picked false.
     bool correctAnswer = quizBrain.getQuestionAnswer();
 
-    if (userAnswer == correctAnswer) {
-      // ignore: avoid_print
-      print('It is Right');
-      scoreKeeper.add(
-        const Icon(
-          Icons.check,
-          color: Colors.green,
-          semanticLabel: 'check mark as true',
-        ),
-      );
-    } else {
-      // ignore: avoid_print
-      print('it is wrong');
-      scoreKeeper.add(
-        const Icon(
-          Icons.close,
-          color: Colors.red,
-          semanticLabel: 'cross - X - icon as false',
-        ),
-      );
-    }
+    setState(() {
+      if (userAnswer == correctAnswer) {
+        // ignore: avoid_print
+        print('It is Right');
+        scoreKeeper.add(
+          const Icon(
+            Icons.check,
+            color: Colors.green,
+            semanticLabel: 'check mark as true',
+          ),
+        );
+      } else {
+        // ignore: avoid_print
+        print('it is wrong');
+        scoreKeeper.add(
+          const Icon(
+            Icons.close,
+            color: Colors.red,
+            semanticLabel: 'cross - X - icon as false',
+          ),
+        );
+      }
+    });
   }
 
   @override
